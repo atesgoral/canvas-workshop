@@ -39,8 +39,8 @@ const circles = [];
 
 while (circles.length < MAX_CIRCLES) {
   circles.push({
-    x: Math.random() * stage.width,
-    y: Math.random() * stage.height
+    x: Math.random(),
+    y: Math.random()
   });
 }
 
@@ -49,13 +49,13 @@ function draw(t) {
   ctx.fillRect(0, 0, stage.width, stage.height);
 
   circles.forEach((circle) => {
-    const x = (circle.x + t / 10) % stage.width;
+    const x = (circle.x + t / 10 / stage.width) % 1;
     const y = circle.y;
 
     ctx.fillStyle = '#fff';
 
     ctx.beginPath();
-    ctx.arc(x, y, MAX_RADIUS, 0, Math.PI * 2);
+    ctx.arc(x * stage.width, y * stage.height, MAX_RADIUS, 0, Math.PI * 2);
     ctx.fill();
   });
 }
