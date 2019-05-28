@@ -7,6 +7,7 @@ body { padding: 0; margin: 0; }
 <script>
 const MAX_CIRCLES = 250;
 const MAX_RADIUS = 2;
+const MAX_FPS = 30;
 
 const stage = document.getElementById('stage');
 const ctx = stage.getContext('2d');
@@ -70,7 +71,13 @@ function draw(t) {
 let epoch = null;
 
 function tick(t) {
-  requestAnimationFrame(tick);
+  if (MAX_FPS >= 60) {
+    requestAnimationFrame(tick);
+  } else {
+    setTimeout(() => {
+      requestAnimationFrame(tick);
+    }, 1000 / MAX_FPS);
+  }
 
   if (epoch === null) {
     epoch = t;
