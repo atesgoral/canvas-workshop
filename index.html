@@ -1,4 +1,9 @@
-<canvas id="stage"></canvas>
+<canvas id="stage" width="1920" height="1080"></canvas>
+<style>
+html, body { height: 100%; }
+body { padding: 0; margin: 0; }
+#stage { height: 100%; background: red; }
+</style>
 <script>
 const stage = document.getElementById('stage');
 const ctx = stage.getContext('2d');
