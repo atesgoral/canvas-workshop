@@ -19,10 +19,21 @@ function resize() {
 resize();
 
 function debounce(fn, delay) {
-  return fn;
+  let timeout = null;
+
+  return function () {
+    if (timeout) {
+      clearTimeout(timeout);
+    }
+
+    timeout = setTimeout(() => {
+      fn.apply(this, arguments);
+      timeout = null;
+    }, delay);
+  };
 }
 
-window.addEventListener('resize', debounce(resize));
+window.addEventListener('resize', debounce(resize, 250));
 
 const circles = [];
 
