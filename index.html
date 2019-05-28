@@ -43,10 +43,18 @@ function draw(t) {
   });
 }
 
+let epoch = null;
+
 function tick(t) {
   requestAnimationFrame(tick);
 
-  draw(t);
+  if (epoch === null) {
+    epoch = t;
+  }
+
+  const elapsed = t - epoch;
+
+  draw(elapsed);
 }
 
 requestAnimationFrame(tick);
