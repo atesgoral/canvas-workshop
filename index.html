@@ -5,7 +5,7 @@ body { padding: 0; margin: 0; background: #000; text-align: center; }
 #stage { height: 100%; }
 </style>
 <script>
-const MAX_CIRCLES = 250;
+const MAX_CIRCLES = 1000;
 const MAX_RADIUS = 2 / 1000;
 const MAX_FPS = 30;
 const MAX_VELOCITY = 1 / 10 / 1000;
@@ -51,7 +51,8 @@ while (circles.length < MAX_CIRCLES) {
     x: Math.random(),
     y: Math.random(),
     z: Math.random() ** 9,
-    hue: Math.random()
+    hue: Math.random(),
+    phase: Math.random()
   });
 }
 
@@ -67,7 +68,7 @@ function draw(t) {
   circles.forEach((circle) => {
     const z = circle.z;
     const x = (circle.x + t * MAX_VELOCITY * z) % 1;
-    const y = circle.y;
+    const y = circle.y + Math.sin(circle.phase + t / 1000) / normHeight / 10;
     const r = MAX_RADIUS * z;
 
     ctx.fillStyle = `hsla(${circle.hue * 360}, 100%, 50%, ${Math.random() * .5})`;
