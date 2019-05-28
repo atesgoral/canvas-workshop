@@ -18,6 +18,12 @@ function resize() {
 
 resize();
 
+function debounce(fn, delay) {
+  return fn;
+}
+
+window.addEventListener('resize', debounce(resize));
+
 const circles = [];
 
 while (circles.length < MAX_CIRCLES) {
