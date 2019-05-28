@@ -58,8 +58,10 @@ function draw(t) {
   const normWidth = stage.width / scale;
   const normHeight = stage.height / scale;
 
+  ctx.globalAlpha = .25;
   ctx.fillStyle = '#000';
   ctx.fillRect(0, 0, normWidth, normHeight);
+  ctx.globalAlpha = 1;
 
   circles.forEach((circle) => {
     const z = circle.z;
