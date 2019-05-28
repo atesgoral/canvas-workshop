@@ -10,10 +10,17 @@ const MAX_RADIUS = 2;
 
 const stage = document.getElementById('stage');
 const ctx = stage.getContext('2d');
+let scale = null;
 
 function resize() {
-  stage.width = stage.clientWidth;
-  stage.height = stage.clientHeight;
+  const pixelRatio = window.devicePixelRatio || 1;
+
+  stage.width = stage.clientWidth * pixelRatio;
+  stage.height = stage.clientHeight * pixelRatio;
+
+  scale = stage.width;
+
+  ctx.scale(scale, scale);
 }
 
 resize();
@@ -55,7 +62,7 @@ function draw(t) {
     ctx.fillStyle = '#fff';
 
     ctx.beginPath();
-    ctx.arc(x * stage.width, y * stage.height, MAX_RADIUS, 0, Math.PI * 2);
+    ctx.arc(x, y, MAX_RADIUS / scale, 0, Math.PI * 2);
     ctx.fill();
   });
 }
