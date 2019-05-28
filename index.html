@@ -5,6 +5,9 @@ body { padding: 0; margin: 0; }
 #stage { height: 100%; }
 </style>
 <script>
+const MAX_CIRCLES = 250;
+const MAX_RADIUS = 2;
+
 const stage = document.getElementById('stage');
 const ctx = stage.getContext('2d');
 
@@ -18,9 +21,23 @@ resize();
 ctx.fillStyle = '#000';
 ctx.fillRect(0, 0, stage.width, stage.height);
 
-ctx.fillStyle = '#fff';
+const circles = [];
 
-ctx.beginPath();
-ctx.arc(100, 100, 50, 0, Math.PI * 2);
-ctx.fill();
+while (circles.length < MAX_CIRCLES) {
+  circles.push({
+    x: Math.random() * stage.width,
+    y: Math.random() * stage.height
+  });
+}
+
+circles.forEach((circle) => {
+  const x = circle.x;
+  const y = circle.y;
+
+  ctx.fillStyle = '#fff';
+
+  ctx.beginPath();
+  ctx.arc(x, y, MAX_RADIUS, 0, Math.PI * 2);
+  ctx.fill();
+});
 </script>
