@@ -100,6 +100,15 @@ function draw(t) {
   ctx.textAlign = 'center';
   ctx.lineWidth = 1 / scale;
   ctx.strokeText('IMPACT', normWidth / 2, normHeight / 2);
+
+  const imageData = ctx.getImageData(0, 0, stage.width, stage.height);
+  const data = imageData.data;
+
+  for (let i = 0; i < data.length / 4; i++) {
+    data[i * 4] = data[(i + 3) * 4];
+  }
+
+  ctx.putImageData(imageData, 0, 0);
 }
 
 let epoch = null;
