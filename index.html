@@ -1,1 +1,10 @@
-<h1>Canvas Workshop</h1>
+<canvas id="stage"></canvas>
+<script>
+const stage = document.getElementById('stage');
+const ctx = stage.getContext('2d');
+
+ctx.fillRect(0, 0, 100, 100);
+
+console.log(stage.width);
+console.log(stage.clientWidth);
+</script>
