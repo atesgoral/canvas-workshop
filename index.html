@@ -6,7 +6,7 @@ body { padding: 0; margin: 0; }
 </style>
 <script>
 const MAX_CIRCLES = 250;
-const MAX_RADIUS = 6 / 1000;
+const MAX_RADIUS = 2 / 1000;
 const MAX_FPS = 30;
 const MAX_VELOCITY = 1 / 10 / 1000;
 
@@ -50,7 +50,8 @@ while (circles.length < MAX_CIRCLES) {
   circles.push({
     x: Math.random(),
     y: Math.random(),
-    z: Math.random()
+    z: Math.random(),
+    hue: Math.random()
   });
 }
 
@@ -68,6 +69,18 @@ function draw(t) {
     const x = (circle.x + t * MAX_VELOCITY * z) % 1;
     const y = circle.y;
     const r = MAX_RADIUS * z;
+
+    ctx.fillStyle = `hsla(${circle.hue * 360}, 100%, 50%, ${Math.random() * .5})`;
+
+    ctx.beginPath();
+    ctx.arc(
+      x * normWidth,
+      y * normHeight,
+      r * 3,
+      0,
+      Math.PI * 2
+    );
+    ctx.fill();
 
     ctx.fillStyle = '#fff';
 
